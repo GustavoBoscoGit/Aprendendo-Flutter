@@ -16,8 +16,7 @@ class BytebankApp extends StatelessWidget {
 }
 
 class FormularioTransferencia extends StatelessWidget {
-  final TextEditingController _controladorCampoNumeroConta =
-      TextEditingController();
+  final TextEditingController _controladorCampoNumeroConta = TextEditingController();
   final TextEditingController _controladorCampoValor = TextEditingController();
 
   @override
@@ -60,8 +59,7 @@ class FormularioTransferencia extends StatelessWidget {
           ),
           RaisedButton(
             onPressed: () {
-              final int numeroConta =
-                  int.parse(_controladorCampoNumeroConta.text);
+              final int numeroConta = int.parse(_controladorCampoNumeroConta.text);
               final double valor = double.parse(_controladorCampoValor.text);
               if (numeroConta != null && valor != null) {
                 final transferenciaCriada = Tranferencia(valor, numeroConta);
