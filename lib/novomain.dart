@@ -16,7 +16,7 @@ void main() => runApp(
             textDirection: TextDirection.ltr,
           ),
           Text(
-            'Crat beatiful Uis',
+            'testando github commit',
             textDirection: TextDirection.ltr,
           ),
           Expanded(
