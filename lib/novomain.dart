@@ -28,35 +28,8 @@ class FormularioTransferencia extends StatelessWidget {
       ),
       body: Column(
         children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _controladorCampoNumeroConta,
-              style: TextStyle(
-                fontSize: 24.0,
-              ),
-              decoration: InputDecoration(
-                labelText: 'Numero da conta',
-                hintText: '0000',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: TextField(
-              controller: _controladorCampoValor,
-              style: TextStyle(
-                fontSize: 24.0,
-              ),
-              decoration: InputDecoration(
-                icon: Icon(Icons.monetization_on),
-                labelText: 'Valor',
-                hintText: '0.00',
-              ),
-              keyboardType: TextInputType.number,
-            ),
-          ),
+          Editor(controlador: _controladorCampoNumeroConta, dica: '0000', rotulo: 'Numero da conta'),
+          Editor2(controlador2: _controladorCampoValor, dica2: '0.00', rotulo2: 'Valor', icone: Icons.monetization_on),
           RaisedButton(
             onPressed: () {
               final int numeroConta = int.parse(_controladorCampoNumeroConta.text);
@@ -69,6 +42,60 @@ class FormularioTransferencia extends StatelessWidget {
             child: Text('Confirmar'),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class Editor extends StatelessWidget {
+  final TextEditingController controlador;
+  final String rotulo;
+  final String dica;
+
+  Editor({required this.controlador, required this.rotulo, required this.dica});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: TextField(
+        controller: controlador,
+        style: TextStyle(
+          fontSize: 24.0,
+        ),
+        decoration: InputDecoration(
+          labelText: rotulo,
+          hintText: dica,
+        ),
+        keyboardType: TextInputType.number,
+      ),
+    );
+  }
+}
+
+class Editor2 extends StatelessWidget {
+  final TextEditingController controlador2;
+  final String rotulo2;
+  final String dica2;
+  final IconData icone;
+
+  Editor2({required this.controlador2, required this.rotulo2, required this.dica2, required this.icone});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: TextField(
+        controller: controlador2,
+        style: TextStyle(
+          fontSize: 24.0,
+        ),
+        decoration: InputDecoration(
+          icon: Icon(icone),
+          labelText: rotulo2,
+          hintText: dica2,
+        ),
+        keyboardType: TextInputType.number,
       ),
     );
   }
