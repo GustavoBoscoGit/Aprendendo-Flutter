@@ -15,6 +15,10 @@ void main() => runApp(
             'Crat beatiful Uis',
             textDirection: TextDirection.ltr,
           ),
+          Text(
+            'Crat beatiful Uis',
+            textDirection: TextDirection.ltr,
+          ),
           Expanded(
             child: FittedBox(
               fit: BoxFit.contain,
