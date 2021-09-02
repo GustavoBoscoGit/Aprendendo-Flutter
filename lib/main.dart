@@ -1,87 +1,114 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(Quiz());
 }
 
-class MyApp extends StatelessWidget {
+class Quiz extends StatelessWidget {
+  const Quiz({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.grey.shade900,
         body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              CircleAvatar(
-                radius: 50.0,
-                backgroundImage: AssetImage('image/image0.png'),
-              ),
-              Text(
-                'Gustavo Bosco',
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            child: QuizPage(),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class QuizPage extends StatefulWidget {
+  const QuizPage({Key? key}) : super(key: key);
+
+  @override
+  _QuizPageState createState() => _QuizPageState();
+}
+
+class _QuizPageState extends State<QuizPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Expanded(
+          flex: 5,
+          child: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Center(
+              child: Text(
+                'Aqui virá o texto da pergunta.',
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 35.0,
+                  fontSize: 25.0,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Text(
-                'Automation test Developer',
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(15.0),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.green,
+              ),
+              child: Text(
+                'Verdadeiro',
                 style: TextStyle(
+                  color: Colors.white,
                   fontSize: 20.0,
+                ),
+              ),
+              onPressed: () {
+                print('Verdadeiro foi pressionado.');
+              },
+            ),
+          ),
+        ),
+        Expanded(
+          child: Padding(
+            padding: EdgeInsets.all(15.0),
+            child: TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.red,
+              ),
+              child: Text(
+                'Falso',
+                style: TextStyle(
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 2.5,
+                  fontSize: 20.0,
                 ),
               ),
-              SizedBox(
-                height: 20.0,
-                width: 200.0,
-                child: Divider(
-                  color: Colors.white,
-                ),
+              onPressed: () {
+                print('falso foi pressionado.');
+              },
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Row(
+            children: [
+              Icon(
+                Icons.check,
+                color: Colors.green,
               ),
-              Card(
-                color: Colors.white,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.phone,
-                    color: Colors.teal,
-                  ),
-                  title: Text(
-                    '+55 47 99999-2070',
-                    style: TextStyle(
-                      color: Colors.teal[900],
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 20.0,
-                    ),
-                  ),
-                ),
-              ),
-              Card(
-                color: Colors.white,
-                margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 25.0),
-                child: ListTile(
-                  leading: Icon(
-                    Icons.mail,
-                    color: Colors.teal,
-                  ),
-                  title: Text(
-                    'gustavobosco1@gmail.com',
-                    style: TextStyle(
-                      color: Colors.teal[900],
-                      fontFamily: 'Source Sans Pro',
-                      fontSize: 20.0,
-                    ),
-                  ),
-                ),
+              Icon(
+                Icons.close,
+                color: Colors.red,
               ),
             ],
           ),
         ),
-      ),
+      ],
     );
   }
 }
