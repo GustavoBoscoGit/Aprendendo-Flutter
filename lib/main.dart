@@ -31,6 +31,8 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  List<Icon> scoreKeeper = [];
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -68,6 +70,13 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                setState(() {});
+                scoreKeeper.add(
+                  Icon(
+                    Icons.check,
+                    color: Colors.green,
+                  ),
+                );
                 print('Verdadeiro foi pressionado.');
               },
             ),
@@ -88,6 +97,13 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
+                setState(() {});
+                scoreKeeper.add(
+                  Icon(
+                    Icons.close,
+                    color: Colors.red,
+                  ),
+                );
                 print('falso foi pressionado.');
               },
             ),
@@ -96,16 +112,7 @@ class _QuizPageState extends State<QuizPage> {
         Padding(
           padding: const EdgeInsets.all(10.0),
           child: Row(
-            children: [
-              Icon(
-                Icons.check,
-                color: Colors.green,
-              ),
-              Icon(
-                Icons.close,
-                color: Colors.red,
-              ),
-            ],
+            children: scoreKeeper,
           ),
         ),
       ],
