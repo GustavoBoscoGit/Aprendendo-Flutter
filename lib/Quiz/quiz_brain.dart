@@ -1,4 +1,4 @@
-import 'package:primeiro_projeto/question.dart';
+import 'package:primeiro_projeto/Quiz/question.dart';
 
 class QuizBrain {
   final List<Question> questionBank = [
