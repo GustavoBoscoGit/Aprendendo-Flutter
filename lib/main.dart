@@ -120,39 +120,37 @@ class _QuizPageState extends State<QuizPage> {
       resultIcon = Icon(Icons.close, color: Colors.red);
     }
 
-    setState(
-      () {
-        if (quizBrain.isFinished()) {
-          //mostra tela fim de jogo
-          Alert(
-            context: context,
-            type: AlertType.info,
-            title: 'Fim de jogo!',
-            desc: 'Você chegou ao fim do quiz',
-            buttons: [
-              DialogButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                width: 120.0,
-                child: Text(
-                  'OK',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20.0,
-                  ),
+    setState(() {
+      if (quizBrain.isFinished()) {
+        //mostra tela fim de jogo
+        Alert(
+          context: context,
+          type: AlertType.info,
+          title: 'Fim de jogo!',
+          desc: 'Você chegou ao fim do quiz',
+          buttons: [
+            DialogButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              width: 120.0,
+              child: Text(
+                'OK',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20.0,
                 ),
-              )
-            ],
-          );
-          //reseta jogo
-          quizBrain.reset();
-          scoreKeeper = [];
-        } else {
-          scoreKeeper.add(resultIcon);
-          quizBrain.nextQuestion();
-        }
-      },
-    );
+              ),
+            )
+          ],
+        ).show();
+        //reseta jogo
+        quizBrain.reset();
+        scoreKeeper = [];
+      } else {
+        scoreKeeper.add(resultIcon);
+        quizBrain.nextQuestion();
+      }
+    });
   }
 }
