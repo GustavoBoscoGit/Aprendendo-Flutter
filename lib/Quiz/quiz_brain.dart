@@ -1,7 +1,9 @@
 import 'package:primeiro_projeto/Quiz/question.dart';
 
 class QuizBrain {
-  final List<Question> questionBank = [
+  int _questionNumber = 0;
+
+  final List<Question> _questionBank = [
     Question('Alguns gatos são alérgicos a humanos', true),
     Question('É possível fazer com que uma vaca suba escadas, mas não descê-las.', false),
     Question('Aproximadamente um quarto dos ossos humanos estão nos pés.', true),
@@ -16,4 +18,18 @@ class QuizBrain {
     Question('O chocolate afeta o coração e o sistema nervoso de um cão; algumas gramas são suficientes para matar um cão pequeno.', true),
     Question('Na Virginia do Oeste, EUA, se você atropelar um animal com um carro, por acidente, você pode levá-lo para casa e comê-lo.', true),
   ];
+
+  String getQuestionText() {
+    return _questionBank[_questionNumber].text;
+  }
+
+  bool getQuestionAnswer() {
+    return _questionBank[_questionNumber].answer;
+  }
+
+  void nextQuestion() {
+    if (_questionNumber < _questionBank.length - 1) {
+      _questionNumber++;
+    }
+  }
 }
