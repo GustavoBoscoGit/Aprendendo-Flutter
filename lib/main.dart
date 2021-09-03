@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:primeiro_projeto/quiz_brain.dart';
 
 void main() {
   runApp(Quiz());
@@ -31,7 +32,11 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
+  QuizBrain quizBrain = QuizBrain();
+
   List<Icon> scoreKeeper = [];
+
+  int questionNumber = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +50,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: const EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'Aqui virá o texto da pergunta.',
+                quizBrain.questionBank[questionNumber].text,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 25.0,
@@ -70,14 +75,16 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                setState(() {});
-                scoreKeeper.add(
-                  Icon(
-                    Icons.check,
-                    color: Colors.green,
-                  ),
-                );
-                print('Verdadeiro foi pressionado.');
+                setState(() {
+                  bool correctAnswer = quizBrain.questionBank[questionNumber].answer;
+                  if (correctAnswer == true) {
+                    print('Acertou!');
+                  } else {
+                    print('Errou!');
+                  }
+                  questionNumber++;
+                  print(questionNumber);
+                });
               },
             ),
           ),
@@ -97,14 +104,16 @@ class _QuizPageState extends State<QuizPage> {
                 ),
               ),
               onPressed: () {
-                setState(() {});
-                scoreKeeper.add(
-                  Icon(
-                    Icons.close,
-                    color: Colors.red,
-                  ),
-                );
-                print('falso foi pressionado.');
+                setState(() {
+                  bool correctAnswer = quizBrain.questionBank[questionNumber].answer;
+                  if (correctAnswer == false) {
+                    print('Acertou!');
+                  } else {
+                    print('Errou!');
+                  }
+                  questionNumber++;
+                  print(questionNumber);
+                });
               },
             ),
           ),
