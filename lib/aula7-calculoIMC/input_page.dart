@@ -1,4 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:primeiro_projeto/aula7-calculoIMC/reusable_card.dart';
+
+import 'constants.dart';
+import 'icon_content.dart';
+
+enum Gender {
+  male,
+  female,
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -6,6 +16,9 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+  Gender? selectedGender;
+  int height = 160;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,18 +26,37 @@ class _InputPageState extends State<InputPage> {
           title: Text('Calculadora de IMC'),
         ),
         body: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Expanded(
               child: Row(
                 children: [
                   Expanded(
                     child: ReusableCard(
-                      color: Color(0xFF1D1F33),
+                      color: selectedGender == Gender.male ? kActiveCardColor : kInactiveCardColor,
+                      onTap: () {
+                        setState(() {
+                          selectedGender = Gender.male;
+                        });
+                      },
+                      child: IconContent(
+                        icon: FontAwesomeIcons.mars,
+                        label: 'MASCULINO',
+                      ),
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
-                      color: Color(0xFF1D1F33),
+                      onTap: () {
+                        setState(() {
+                          selectedGender = Gender.female;
+                        });
+                      },
+                      color: selectedGender == Gender.female ? kActiveCardColor : kInactiveCardColor,
+                      child: IconContent(
+                        icon: FontAwesomeIcons.venus,
+                        label: 'FEMININO',
+                      ),
                     ),
                   ),
                 ],
@@ -32,7 +64,41 @@ class _InputPageState extends State<InputPage> {
             ),
             Expanded(
               child: ReusableCard(
-                color: Color(0xFF1D1F33),
+                color: kActiveCardColor,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      'ALTURA',
+                      style: kLabelTextStyle,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.baseline,
+                      textBaseline: TextBaseline.alphabetic,
+                      children: [
+                        Text(
+                          height.toString(),
+                          style: kNumberTextStyle,
+                        ),
+                        Text(
+                          'cm',
+                          style: kLabelTextStyle,
+                        ),
+                      ],
+                    ),
+                    Slider(
+                      value: height.toDouble(),
+                      onChanged: (double value) {
+                        setState(() {
+                          height = value.round();
+                        });
+                      },
+                      min: 100,
+                      max: 220,
+                    ),
+                  ],
+                ),
               ),
             ),
             Expanded(
@@ -40,12 +106,12 @@ class _InputPageState extends State<InputPage> {
                 children: [
                   Expanded(
                     child: ReusableCard(
-                      color: Color(0xFF1D1F33),
+                      color: kActiveCardColor,
                     ),
                   ),
                   Expanded(
                     child: ReusableCard(
-                      color: Color(0xFF1D1F33),
+                      color: kActiveCardColor,
                     ),
                   ),
                 ],
@@ -53,22 +119,5 @@ class _InputPageState extends State<InputPage> {
             ),
           ],
         ));
-  }
-}
-
-class ReusableCard extends StatelessWidget {
-  final Color color;
-
-  ReusableCard({required this.color});
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(15.0),
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-    );
   }
 }
